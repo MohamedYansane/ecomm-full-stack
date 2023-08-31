@@ -15,9 +15,25 @@ model Store {
   id String @id @default(uuid())
   name String
   userId String
+  bilboards Billboard[] @relation("StoreToBillboard")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 //then we enter npx prisma generate
 //after generating prisma client to the node module
 //then we push it by typing npx prisma db push
+
+//creating bilboard model
+model Billboard{
+  id String @id @default(uuid())
+  // a relationship to the store
+  storeId String
+  //store object relation connected to the store
+  store Store @relation("StoreToBillboard", fields:[storeId], references:[id])
+  label String
+  imageUrl String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  //to resolve the warning about the relationship i added that
+  @@index([storeId])
+}
