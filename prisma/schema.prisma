@@ -20,6 +20,9 @@ model Store {
   userId String
   bilboards Billboard[] @relation("StoreToBillboard")
   categories Category[] @relation("StoreToCategory")
+  colors Color[] @relation("StoreToColor")
+  products Product[] @relation("StoreToProduct")
+  sizes Size[] @relation("StoreToSize")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -50,8 +53,73 @@ model Category{
   billboardId String      // Foreign Key to Billboard
   billboard Billboard @relation("BillboardToCategory", fields:[billboardId],references: [id])
   name String
+  products  Product[] @relation("CategoryToProduct")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   @@index([storeId])
   @@index([billboardId])
+}
+//faut pas que j'oublie que je dois aller sur 
+//son github pour faire une mise a jr du schema.prisma
+// et suivre l'ordre de creation des modeles en faisant le mien
+model Size {
+  id String @id @default(uuid())
+  storeId String 
+  store Store @relation("StoreToSize", fields: [storeId], references:[id])
+  name String
+  value String
+   products    Product[] // Relation to Product model
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([storeId])
+}
+
+model Color {
+  id          String   @id @default(uuid())
+  storeId     String   // Foreign Key to Store
+  store       Store    @relation("StoreToColor", fields: [storeId], references: [id])
+  name        String
+  value       String
+   products    Product[] // Relation to Product model
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([storeId])
+}
+// i created both model at the same time product and Image
+model Product {
+  id          String    @id @default(uuid())
+  storeId     String    // Foreign Key to Store
+  store       Store     @relation("StoreToProduct", fields: [storeId], references: [id])
+  categoryId  String    // Foreign Key to Category
+  category    Category  @relation("CategoryToProduct", fields: [categoryId], references: [id])
+  name        String
+  price       Decimal
+  isFeatured  Boolean   @default(false)
+  isArchived  Boolean   @default(false)
+  sizeId      String    // Foreign Key to Size
+  size        Size      @relation(fields: [sizeId], references: [id])
+  colorId     String    // Foreign Key to Color
+  color       Color     @relation(fields: [colorId], references: [id])
+  images      Image[]   // Relation to Image model
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([storeId])
+  @@index([categoryId])
+  @@index([sizeId])
+  @@index([colorId])
+}
+model Image {
+  id  String   @id @default(uuid())
+  //we add onDelete cascade so that when we delete  a
+  //product it will delete automatically the image
+  //otherwise it will not
+  productId   String   // Foreign Key to Product
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url         String   // URL of the image
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([productId])
 }
