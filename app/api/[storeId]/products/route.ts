@@ -96,7 +96,8 @@ export async function GET(
     const colorId = searchParams.get("colorId") || undefined;
     const sizeId = searchParams.get("sizeId") || undefined;
     const isFeatured = searchParams.get("isFeatured"); // we dont need undefined here
-
+    //exemple of my filtering test http://localhost:3000/api/cec8ba00-21c0-4194-a2dd-0b3bfdd7fab2/products?colorId=baadfee8-ccf7-4b04-9c1b-b1ec88e61431
+    //adding a question mark ?and follow by the name of one of my element
     if (!params.storeId) {
       return new NextResponse("StoreId is required", { status: 400 });
     }
