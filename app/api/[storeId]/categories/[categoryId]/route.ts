@@ -16,6 +16,9 @@ export async function GET(
     //Notice we r using deleteMany cause the userId is not unique
     const category = await prismadb.category.findUnique({
       where: { id: params.categoryId },
+      include:{
+        billboard:true
+      }
     });
 
     return NextResponse.json(category);

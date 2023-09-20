@@ -33,3 +33,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#ignoring stripe.exe
+# not all *.exe
+stripe.exe
