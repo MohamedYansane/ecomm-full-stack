@@ -15,12 +15,6 @@ interface ModalPops {
   onClose: () => void;
   children?: React.ReactNode;
 }
-const DynamicDialogContent = dynamic(
-  () => import("@/components/ui/dialog").then((module) => module.DialogContent),
-  {
-    ssr: false,
-  }
-);
 
 export const Modal: React.FC<ModalPops> = ({
   title,
