@@ -31,7 +31,7 @@ interface SettingsFormProps {
 const formSchema = z.object({
   name: z.string().min(1),
 });
-// we write to avoid rewriting a formSchema again and again
+// we write to avoid rewriting of z.infer<typeof formSchema> in our useForm and again
 type SettingsFormValues = z.infer<typeof formSchema>;
 export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
   /* const [isMounted, setIsMounted] = useState(false);

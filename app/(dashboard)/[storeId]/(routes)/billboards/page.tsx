@@ -12,6 +12,7 @@ const BillboardsPage = async ({ params }: { params: { storeId: string } }) => {
   //to format the date to string i've to install a package  npm i date-fns
   const formattedBillboards: BillboardColumn[] = billboards.map((item) => ({
     id: item.id,
+    imageUrl: item.imageUrl,
     label: item.label,
     createdAt: format(item.createdAt, "MMMM do yyyy"),
   }));

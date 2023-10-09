@@ -6,7 +6,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 interface ModalPops {
   title: string;
