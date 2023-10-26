@@ -10,7 +10,7 @@ export async function GET(
 ) {
   try {
     if (!params.productId) {
-      return new NextResponse("product ID is required", { status: 400 });
+      return new NextResponse("Product ID is required", { status: 400 });
     }
 
     //Notice we r using deleteMany cause the userId is not unique

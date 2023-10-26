@@ -350,7 +350,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                   </div>
                 </FormItem>
               )}
-            />{" "}
+            />
             <FormField
               control={form.control}
               name="isArchived"
