@@ -60,7 +60,7 @@ export async function GET(
     });
     return NextResponse.json(categories);
   } catch (error) {
-    console.log("[BILLBOARD_POST] Error: ", error);
+    console.log("[BILLBOARD_GET] Error: ", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
